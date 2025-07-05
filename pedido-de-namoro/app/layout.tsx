@@ -1,13 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
 import "./globals.css"
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-})
 
 export const metadata: Metadata = {
   title: "Um Pedido Especial para Edlany 💕",
@@ -28,7 +21,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={poppins.className}>{children}</body>
+      <head>
+        {/* Fontes Românticas */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Pacifico&family=Sacramento&family=Satisfy&family=Kaushan+Script&family=Amatic+SC:wght@400;700&family=Caveat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   )
 }

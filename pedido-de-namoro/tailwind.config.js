@@ -1,15 +1,23 @@
-const defaultConfig = require("shadcn/ui/tailwind.config")
-
 module.exports = {
-  ...defaultConfig,
+  darkMode: ["class"],
   content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    ...defaultConfig.theme,
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
@@ -51,16 +59,6 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      animation: {
-        float: "float 6s ease-in-out infinite",
-        twinkle: "twinkle 2s ease-in-out infinite",
-        "fade-in-down": "fade-in-down 1.5s ease-out",
-        "fade-in-up": "fade-in-up 1.5s ease-out 0.5s both",
-        "fade-in-text": "fade-in-text 0.8s ease-out both",
-        "bounce-in": "bounce-in 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-        "slide-in-bottom": "slide-in-bottom 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-        "final-celebration": "final-celebration 2s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-      },
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
@@ -97,7 +95,17 @@ module.exports = {
           "100%": { transform: "scale(1) rotate(0deg)", opacity: "1" },
         },
       },
+      animation: {
+        float: "float 6s ease-in-out infinite",
+        twinkle: "twinkle 2s ease-in-out infinite",
+        "fade-in-down": "fade-in-down 1.5s ease-out",
+        "fade-in-up": "fade-in-up 1.5s ease-out 0.5s both",
+        "fade-in-text": "fade-in-text 0.8s ease-out both",
+        "bounce-in": "bounce-in 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "slide-in-bottom": "slide-in-bottom 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+        "final-celebration": "final-celebration 2s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+      },
     },
   },
-  plugins: [...defaultConfig.plugins, require("tailwindcss-animate")],
+  plugins: [],
 }

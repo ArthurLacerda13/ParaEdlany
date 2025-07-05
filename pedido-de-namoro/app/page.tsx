@@ -3,9 +3,15 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Heart, Sparkles, Camera, Coffee, Film, Smartphone, Github, Star } from "lucide-react"
+import { Heart, Sparkles, Coffee, Film, Smartphone, Github } from "lucide-react"
+import BackgroundMusic from "@/components/background-music"
+import SplashScreen from "@/components/splash-screen"
+import LoveCounter from "@/components/love-counter"
+import MediaGallery from "@/components/media-gallery"
 
 export default function PedidoNamoro() {
+  const [showSplash, setShowSplash] = useState(true)
+  const [musicStarted, setMusicStarted] = useState(false)
   const [clickCount, setClickCount] = useState(0)
   const [showCelebration, setShowCelebration] = useState(false)
   const [showContract, setShowContract] = useState(false)
@@ -22,14 +28,6 @@ export default function PedidoNamoro() {
     "Última chance de clicar no lugar certo! 😘",
     "Sério mesmo? O 'Sim' está te esperando! 💕",
     "Pare de fugir da felicidade! 🌟",
-  ]
-
-  const photos = [
-    { icon: Camera, text: "Nossa primeira foto juntos", color: "from-pink-400 to-rose-500" },
-    { icon: Coffee, text: "Nosso primeiro encontro", color: "from-amber-400 to-orange-500" },
-    { icon: Heart, text: "Momento especial nosso", color: "from-purple-400 to-pink-500" },
-    { icon: Sparkles, text: "Risadas e diversão", color: "from-blue-400 to-cyan-500" },
-    { icon: Star, text: "Nosso momento favorito", color: "from-emerald-400 to-teal-500" },
   ]
 
   const contractClauses = [
@@ -65,32 +63,39 @@ export default function PedidoNamoro() {
     },
   ]
 
+  const handleStartExperience = () => {
+    setShowSplash(false)
+    setMusicStarted(true)
+  }
+
   useEffect(() => {
     // Criar partículas flutuantes
-    const createParticles = () => {
-      const particles = document.querySelectorAll(".particle")
-      particles.forEach((particle) => particle.remove())
+    if (!showSplash) {
+      const createParticles = () => {
+        const particles = document.querySelectorAll(".particle")
+        particles.forEach((particle) => particle.remove())
 
-      for (let i = 0; i < 20; i++) {
-        const particle = document.createElement("div")
-        particle.className = "particle fixed pointer-events-none z-0"
-        particle.style.left = Math.random() * 100 + "%"
-        particle.style.animationDelay = Math.random() * 8 + "s"
-        particle.style.animationDuration = Math.random() * 4 + 6 + "s"
-        document.body.appendChild(particle)
+        for (let i = 0; i < 20; i++) {
+          const particle = document.createElement("div")
+          particle.className = "particle fixed pointer-events-none z-0"
+          particle.style.left = Math.random() * 100 + "%"
+          particle.style.animationDelay = Math.random() * 8 + "s"
+          particle.style.animationDuration = Math.random() * 4 + 6 + "s"
+          document.body.appendChild(particle)
 
-        setTimeout(() => {
-          if (document.body.contains(particle)) {
-            document.body.removeChild(particle)
-          }
-        }, 10000)
+          setTimeout(() => {
+            if (document.body.contains(particle)) {
+              document.body.removeChild(particle)
+            }
+          }, 10000)
+        }
       }
-    }
 
-    createParticles()
-    const interval = setInterval(createParticles, 8000)
-    return () => clearInterval(interval)
-  }, [])
+      createParticles()
+      const interval = setInterval(createParticles, 8000)
+      return () => clearInterval(interval)
+    }
+  }, [showSplash])
 
   const handleNoClick = () => {
     const newClickCount = clickCount + 1
@@ -150,8 +155,16 @@ export default function PedidoNamoro() {
     }
   }
 
+  // Mostrar splash screen primeiro
+  if (showSplash) {
+    return <SplashScreen onStart={handleStartExperience} />
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 relative overflow-hidden">
+      {/* Background Music - inicia automaticamente após splash */}
+      <BackgroundMusic autoStart={musicStarted} />
+
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 via-purple-400/20 to-indigo-400/20 animate-pulse" />
 
@@ -177,41 +190,35 @@ export default function PedidoNamoro() {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in-down">
           <div className="relative inline-block">
-            <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent mb-4 animate-pulse">
+            <h1
+              className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent mb-4 animate-pulse"
+              style={{ fontFamily: "Great Vibes, cursive" }}
+            >
               💕 Para Edlany 💕
             </h1>
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 text-4xl animate-twinkle">✨</div>
           </div>
-          <p className="text-xl md:text-2xl text-gray-700 font-medium">
+          <p
+            className="text-xl md:text-2xl text-gray-700 font-medium"
+            style={{ fontFamily: "Dancing Script, cursive" }}
+          >
             Um pedido especial de alguém que te ama muito...
           </p>
         </div>
 
-        {/* Photo Carousel */}
-        <Card className="mb-16 p-8 bg-white/80 backdrop-blur-sm border-0 shadow-2xl animate-fade-in-up">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {photos.map((photo, index) => (
-              <div
-                key={index}
-                className={`relative group cursor-pointer transform transition-all duration-300 hover:scale-105`}
-              >
-                <div
-                  className={`bg-gradient-to-br ${photo.color} p-8 rounded-2xl shadow-lg h-64 flex flex-col items-center justify-center text-white text-center`}
-                >
-                  <photo.icon className="w-12 h-12 mb-4 animate-bounce" />
-                  <p className="font-medium text-sm leading-relaxed">{photo.text}</p>
-                  <p className="text-xs mt-2 opacity-80">(Substitua por uma foto real)</p>
-                </div>
-                <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            ))}
-          </div>
-        </Card>
+        {/* Media Gallery - Fotos e Vídeos */}
+        <MediaGallery />
+
+        {/* Love Counter */}
+        <LoveCounter />
 
         {/* Message Section */}
         <Card className="mb-16 p-12 bg-gradient-to-br from-white/90 to-pink-50/90 backdrop-blur-sm border-0 shadow-2xl animate-fade-in-up">
           <div className="text-center space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent mb-8">
+            <h2
+              className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent mb-8"
+              style={{ fontFamily: "Pacifico, cursive" }}
+            >
               Edlany...
             </h2>
             <div className="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -235,7 +242,10 @@ export default function PedidoNamoro() {
         {!showCelebration && (
           <Card className="mb-16 p-12 bg-gradient-to-br from-purple-100/90 to-pink-100/90 backdrop-blur-sm border-2 border-purple-200 shadow-2xl animate-fade-in-up relative">
             <div className="text-center">
-              <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-12 animate-pulse">
+              <h2
+                className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-12 animate-pulse"
+                style={{ fontFamily: "Kaushan Script, cursive" }}
+              >
                 💖 Você quer namorar comigo? 💖
               </h2>
 
@@ -249,7 +259,8 @@ export default function PedidoNamoro() {
 
                 <Button
                   onClick={handleYesClick}
-                  className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-12 py-6 text-xl font-bold rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:shadow-pink-500/50"
+                  className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-12 py-6 text-xl font-bold rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:shadow-pink-500/50 border-0"
+                  style={{ borderRadius: "50px" }}
                 >
                   <Heart className="w-6 h-6 mr-2" />
                   Sim! 💕
@@ -257,8 +268,9 @@ export default function PedidoNamoro() {
 
                 <Button
                   onClick={handleNoClick}
-                  className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-white px-12 py-6 text-xl font-bold rounded-full shadow-2xl transform transition-all duration-300 hover:scale-105"
+                  className="bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-white px-12 py-6 text-xl font-bold rounded-full shadow-2xl transform transition-all duration-300 hover:scale-105 border-0"
                   style={{
+                    borderRadius: "50px",
                     transform: `translate(${noButtonPosition.x}px, ${noButtonPosition.y}px) ${clickCount >= 3 ? "rotate(" + (Math.random() * 20 - 10) + "deg)" : ""}`,
                     scale: clickCount >= 5 ? 0.8 + Math.random() * 0.4 : 1,
                   }}
@@ -306,7 +318,8 @@ export default function PedidoNamoro() {
             <div className="text-center">
               <Button
                 onClick={handleAcceptContract}
-                className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 hover:from-purple-600 hover:via-pink-600 hover:to-purple-600 text-white px-16 py-6 text-xl font-bold rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:shadow-purple-500/50"
+                className="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 hover:from-purple-600 hover:via-pink-600 hover:to-purple-600 text-white px-16 py-6 text-xl font-bold rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:shadow-purple-500/50 border-0"
+                style={{ borderRadius: "50px" }}
               >
                 <Heart className="w-6 h-6 mr-2" />
                 Eu aceito os termos! 💖

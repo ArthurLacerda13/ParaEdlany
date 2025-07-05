@@ -1,0 +1,20 @@
+# Esta pasta contém os arquivos de mídia do casal
+# Adicione seus arquivos aqui:
+
+# FOTOS:
+# - primeira-foto.jpg
+# - momento-especial.jpg  
+# - momento-favorito.jpg
+
+# VÍDEOS:
+# - primeiro-video.mp4
+# - diversao.mp4
+
+# FORMATOS SUPORTADOS:
+# Fotos: .jpg, .jpeg, .png, .webp
+# Vídeos: .mp4, .webm, .mov
+
+# DICAS:
+# - Vídeos ficam melhores em formato .mp4
+# - Mantenha arquivos pequenos para carregamento rápido
+# - Vídeos tocam automaticamente em loop (mutados por padrão)
