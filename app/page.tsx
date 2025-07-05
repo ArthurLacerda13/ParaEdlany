@@ -20,6 +20,12 @@ export default function PedidoNamoro() {
   const [showWarning, setShowWarning] = useState(false)
   const [noButtonPosition, setNoButtonPosition] = useState({ x: 0, y: 0 })
 
+  const [celebrationAudio] = useState(
+    typeof window !== "undefined"
+      ? new Audio("/music/celebration2.mp3")
+      : null
+  )
+
   const warningMessages = [
     "Ops! Acho que você clicou no botão errado... 😉",
     "Tem certeza? O botão rosa está bem ali! 👉",
@@ -119,7 +125,10 @@ export default function PedidoNamoro() {
   const handleYesClick = () => {
     setShowCelebration(true)
     createHeartExplosion()
-
+    if (celebrationAudio) {
+      celebrationAudio.currentTime = 0
+      celebrationAudio.play()
+    }
     setTimeout(() => {
       setShowContract(true)
     }, 3000)
@@ -223,16 +232,16 @@ export default function PedidoNamoro() {
             </h2>
             <div className="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
               <p className="animate-fade-in-text">
-                Desde que você chegou na minha vida, tudo ficou mais colorido e especial. 🌈
+                Desde que você chegou na minha vida, a tornou mais colorida! 🌈
               </p>
               <p className="animate-fade-in-text animation-delay-200">
-                Cada momento ao seu lado é um presente que eu guardo no coração. 💝
+                Cada momento que eu passo ao seu lado é um presente que eu guardo no coração. 💝
               </p>
               <p className="animate-fade-in-text animation-delay-400">
-                Você faz meus dias mais felizes e minhas noites mais doces. ✨
+                Você torna meus dias mais felizes e minhas noites mais doces, com um carinho e um cuidado que transbordam em cada gesto. ✨
               </p>
               <p className="animate-fade-in-text animation-delay-600">
-                E agora, como um bom desenvolvedor, preciso fazer uma pergunta muito importante...
+                E agora, preciso fazer uma pergunta muito importante ...
               </p>
             </div>
           </div>
@@ -289,7 +298,7 @@ export default function PedidoNamoro() {
               🎉 EBAAAA! 🎉
             </h2>
             <div className="text-6xl mb-8 animate-bounce">💕 💖 💕 💖 💕</div>
-            <p className="text-2xl text-gray-700 font-medium">Agora precisamos oficializar isso...</p>
+            <p className="text-2xl text-gray-700 font-medium">Agora bora oficializar isso...</p>
           </Card>
         )}
 

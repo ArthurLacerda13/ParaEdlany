@@ -64,7 +64,7 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
             className="text-xl md:text-2xl text-white/90 font-medium animate-fade-in-up"
             style={{ fontFamily: "Dancing Script, cursive" }}
           >
-            Uma experiência romântica especial te aguarda...
+            Uma experiência sensacional te aguarda...
           </p>
         </div>
 
@@ -72,9 +72,9 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 animate-fade-in-up animation-delay-400">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Music className="w-8 h-8 text-white animate-bounce" />
-            <span className="text-white text-lg font-medium">Experiência com Música Romântica</span>
+            <span className="text-white text-lg font-medium">Experiência com Música</span>
           </div>
-          <p className="text-white/80 text-sm">Clique no botão abaixo para iniciar uma jornada musical especial 🎵</p>
+          <p className="text-white/80 text-sm">Clique no botão abaixo para iniciar essa jornada deveras incrível, feita com muito carinho 🎵</p>
         </div>
 
         {/* Start Button */}
@@ -92,7 +92,7 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
           ) : (
             <div className="flex items-center gap-3">
               <Heart className="w-6 h-6 animate-pulse" />
-              <span style={{ fontFamily: "Caveat, cursive" }}>🎵 Iniciar Experiência Romântica 🎵</span>
+              <span style={{ fontFamily: "Caveat, cursive" }}>🎵 Iniciar Experiência 🎵</span>
               <Heart className="w-6 h-6 animate-pulse" />
             </div>
           )}
@@ -100,7 +100,7 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
 
         {/* Subtitle */}
         <p className="text-white/70 text-sm animate-fade-in-up animation-delay-800">
-          ✨ Prepare-se para algo muito especial ✨
+          ✨ Prepare-se para algo muito especial! ✨
         </p>
       </div>
 

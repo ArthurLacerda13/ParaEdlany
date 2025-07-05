@@ -13,6 +13,7 @@ interface BackgroundMusicProps {
 export default function BackgroundMusic({ autoStart = false }: BackgroundMusicProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(0.4)
+  const [previousVolume, setPreviousVolume] = useState(volume)
   const [isMuted, setIsMuted] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -53,6 +54,10 @@ export default function BackgroundMusic({ autoStart = false }: BackgroundMusicPr
       audio.pause()
       setIsPlaying(false)
     } else {
+      // Reinicia o áudio se estiver no fim
+      if (audio.currentTime === audio.duration) {
+        audio.currentTime = 0
+      }
       try {
         await audio.play()
         setIsPlaying(true)
@@ -63,7 +68,14 @@ export default function BackgroundMusic({ autoStart = false }: BackgroundMusicPr
   }
 
   const toggleMute = () => {
-    setIsMuted(!isMuted)
+    if (isMuted) {
+      setVolume(previousVolume > 0 ? previousVolume : 0.4)
+      setIsMuted(false)
+    } else {
+      setPreviousVolume(volume)
+      setVolume(0)
+      setIsMuted(true)
+    }
   }
 
   const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
