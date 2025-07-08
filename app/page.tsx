@@ -22,18 +22,29 @@ export default function PedidoNamoro() {
 
   const [celebrationAudio] = useState(
     typeof window !== "undefined"
-      ? new Audio("/music/celebration2.mp3")
+      ? new Audio("/music/aplauso.mp3")
+      : null
+  )
+  const [noAudio] = useState(
+    typeof window !== "undefined"
+      ? new Audio("/music/nha-pou.mp3")
+      : null
+  )
+  // Novo áudio para o "Sim"
+  const [extraSimAudio] = useState(
+    typeof window !== "undefined"
+      ? new Audio("/music/celebration.mp3")
       : null
   )
 
   const warningMessages = [
-    "Ops! Acho que você clicou no botão errado... 😉",
-    "Tem certeza? O botão rosa está bem ali! 👉",
-    "Ei, o 'Sim' está do outro lado! 😄",
-    "Você deve estar com o dedo tremendo de nervoso... 💙",
+    "É... acho q c errou o botão, não?`",
+    "Oxi, dnv? ué",
+    "Vc ta se confundindo?",
+    "Tem certeza disso?",
     "Última chance de clicar no lugar certo! 😘",
-    "Sério mesmo? O 'Sim' está te esperando! 💕",
-    "Pare de fugir da felicidade! 🌟",
+    "Sério mesmo? O sim é o outro botão 💕",
+    "Tá bom né, se vc ta insistindo em apertar aqui, oq eu posso fazer né 🌟",
   ]
 
   const contractClauses = [
@@ -107,6 +118,12 @@ export default function PedidoNamoro() {
     const newClickCount = clickCount + 1
     setClickCount(newClickCount)
 
+    // Toca o áudio do "não"
+    if (noAudio) {
+      noAudio.currentTime = 0
+      noAudio.play()
+    }
+
     if (newClickCount <= warningMessages.length) {
       setWarningMessage(warningMessages[newClickCount - 1])
       setShowWarning(true)
@@ -128,6 +145,13 @@ export default function PedidoNamoro() {
     if (celebrationAudio) {
       celebrationAudio.currentTime = 0
       celebrationAudio.play()
+    }
+    // Toca o novo áudio 2 segundos depois
+    if (extraSimAudio) {
+      setTimeout(() => {
+        extraSimAudio.currentTime = 0
+        extraSimAudio.play()
+      }, 3650)
     }
     setTimeout(() => {
       setShowContract(true)
