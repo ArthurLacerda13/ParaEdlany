@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Um Pedido Especial para Edlany 💕",
   description: "Um pedido de namoro especial feito com muito amor",
   keywords: ["namoro", "pedido", "amor", "romance"],
-  authors: [{ name: "Seu Nome" }],
+  authors: [{ name: "Arthur Felipe" }],
   openGraph: {
     title: "Um Pedido Especial para Edlany 💕",
     description: "Um pedido de namoro especial feito com muito amor",

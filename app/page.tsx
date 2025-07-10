@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Heart, Sparkles, Coffee, Film, Smartphone, Github } from "lucide-react"
+import { Heart, Sparkles, Coffee, Film, Smartphone, Github, MessageCircle } from "lucide-react"
 import BackgroundMusic from "@/components/background-music"
 import SplashScreen from "@/components/splash-screen"
 import LoveCounter from "@/components/love-counter"
@@ -36,22 +36,27 @@ export default function PedidoNamoro() {
       ? new Audio("/music/celebration.mp3")
       : null
   )
+  const [acceptAudio] = useState(
+    typeof window !== "undefined"
+      ? new Audio("/music/aceito.mp3")
+      : null
+  )
 
   const warningMessages = [
-    "É... acho q c errou o botão, não?`",
-    "Oxi, dnv? ué",
-    "Vc ta se confundindo?",
-    "Tem certeza disso?",
+    "É... acho q c errou o botão, não? 🙃",
+    "Oxi, dnv? ué 😅",
+    "Vc ta se confundindo? 🤔",
+    "Tem certeza disso? 🤨",
     "Última chance de clicar no lugar certo! 😘",
-    "Sério mesmo? O sim é o outro botão 💕",
-    "Tá bom né, se vc ta insistindo em apertar aqui, oq eu posso fazer né 🌟",
+    "Sério mesmo? O sim é o outro botão. 💕",
+    "Tá bom né, se vc ta insistindo em apertar aqui, oq eu posso fazer né. 🥱",
   ]
 
   const contractClauses = [
     {
-      icon: Coffee,
+      icon: MessageCircle, 
       title: "Cláusula 1:",
-      text: "A contratada (Edlany) concorda em aceitar cafés da manhã na cama preparados pelo contratante, mesmo que ele queime a torrada ocasionalmente. 🍞☕",
+      text: "A contratada (Edlany) concorda em aceitar mensagens de bom dia do contratante (Arthur) ao acordar, mesmo que ele esteja perturbando muito. 🙃",
     },
     {
       icon: Film,
@@ -66,17 +71,17 @@ export default function PedidoNamoro() {
     {
       icon: Smartphone,
       title: "Cláusula 4:",
-      text: 'O contratante promete debuggar qualquer problema tecnológico da contratada, incluindo "Por que meu celular está lento?" às 2h da manhã. 📱💻',
+      text: 'O contratante promete não mecher no celular durante conversas pessoalmente, dando completa atenção para a contratada, salvo em momentos que sejam necessário o uso 📱💻',
     },
     {
       icon: Github,
       title: "Cláusula 5:",
-      text: "A contratada tem direito vitalício a abraços reconfortantes, beijos de bom dia e declarações de amor via commit messages no GitHub. 🤗💋",
+      text: "A contratada tem direito vitalício a abraços reconfortantes, beijos de bom dia e declarações de amor via Whatsapp, Instagram e Tik Tok. 🤗💋",
     },
     {
       icon: Sparkles,
       title: "Cláusula 6:",
-      text: "Este contrato é válido até que a velocidade da luz diminua, o WiFi funcione perfeitamente para sempre, ou até que os bugs sejam extintos. 🌟",
+      text: "A contratante e o Contratado tem como obrigação nunca deixar o foguinho do Tik Tok apagar. 🔥",
     },
   ]
 
@@ -159,6 +164,11 @@ export default function PedidoNamoro() {
   }
 
   const handleAcceptContract = () => {
+    // Toca o áudio ao aceitar os termos
+    if (acceptAudio) {
+      acceptAudio.currentTime = 0
+      acceptAudio.play()
+    }
     setShowContract(false)
     setTimeout(() => {
       setShowFinalMessage(true)
@@ -370,7 +380,7 @@ export default function PedidoNamoro() {
             <div className="space-y-6 text-xl md:text-2xl text-gray-700">
               <p>Agora somos oficialmente namorados! 💑</p>
               <p>Obrigado por tornar minha vida mais feliz, Edlany! 💕</p>
-              <p className="italic font-medium">~ Com todo meu amor, seu novo namorado desenvolvedor 👨‍💻💖</p>
+              <p className="italic font-medium">~ Com todo meu amor, Arthurzinho seu novo namorado desenvolvedor 👨‍💻💖</p>
             </div>
           </Card>
         )}
